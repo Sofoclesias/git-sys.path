@@ -5,6 +5,7 @@ import subprocess
 
 def add_git():
     config_file = os.path.expanduser("~/.jupyter/jupyter_notebook_config.py")
+    ipy_dir = os.path.expanduser("~/.ipython/profile_default/startup/")
 
     if os.path.exists(config_file):
         print('Existe config file.')
@@ -16,9 +17,11 @@ def add_git():
         print('Output:', process.stdout)
         config_file = os.path.expanduser("~/.jupyter/jupyter_notebook_config.py")
 
+    shutil.copy('files/jupyter_startup.py',ipy_dir)
+
     agregar = [
         """c.InteractiveShellApp.exec_lines = ["""
-        """'exec(open(os.path.expanduser("~/files/jupyter_startup.py")).read())'"""
+        'import os, sys; exec(open(os.path.expanduser("~/.ipython/profile_default/startup/00-startup.py")).read())'
     """]"""   
     ]
     
@@ -29,12 +32,15 @@ def add_git():
 
 def purge():
     config_file = os.path.expanduser("~/.jupyter/jupyter_notebook_config.py")
+    ipy_dir = os.path.expanduser("~/.ipython/profile_default/startup/")
 
     if os.path.exists(r'backup\jupyter_notebook_config.py'):
         os.remove(config_file)
+        os.remove(ipy_dir)
         shutil.move(r'backup\jupyter_notebook_config.py', config_file)
     else:
         os.remove(config_file)
+        os.remove(ipy_dir)
         
     print('Reseteado a configuraciones iniciales.')
         
