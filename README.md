@@ -5,11 +5,15 @@ Estoy harto de que los notebooks solo te detecten el directorio local donde se u
 Este repositorio, de forma sencilla y directa, agrega un comando al archivo de configuraciones de IPython para que agregue al sys.path el directorio que contenga la carpeta .git, es decir, el directorio raíz de un repositorio. Así, ya tendrás la libertad para manipular todos los archivos relativos a tu repositorio en el kernel de Notebook e importar todos tus módulos.
 
 Por ejemplo, si tienes un diseño de directorios así:
-
-/repositorio
-    /.git
-    /folder
-        notebook.ipynb
-    utils.py
+    
+    /repositorio
+    
+        /.git
+        
+        /folder
+        
+            notebook.ipynb
+            
+        utils.py
 
 Tomando como referencia el directorio donde se ubique el Notebook, se explorarán los directorios padres hasta encontrar aquél que contenga el folder .git, a lo que se agregará al sys.path.
