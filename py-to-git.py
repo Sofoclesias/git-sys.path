@@ -4,6 +4,7 @@ import shutil
 import subprocess
 
 def add_git():
+    # Para Notebooks
     config_file = os.path.expanduser("~/.jupyter/jupyter_notebook_config.py")
     ipy_dir = os.path.expanduser("~/.ipython/profile_default/startup/")
 
@@ -27,21 +28,41 @@ def add_git():
     
     with open(config_file, 'a') as file:
         file.writelines(agregar)
-        
+    
+    # Para archivos python
+    site_file = os.path.expanduser('~/anaconda3/Lib/')
+    
+    if os.path.exists(site_file + 'sitecustomize.py'):
+        print('Existe archivo sitecustomize.')
+        name = os.path.basename(site_file + 'sitecustomize.py')
+        shutil.copyfile(site_file, os.path.join('backup',name))
+    
+    shutil.copy('files/sitecustomize.py', site_file)
+    
     print('Excepción creada con éxito.')
 
 def purge():
-    config_file = os.path.expanduser("~/.jupyter/jupyter_notebook_config.py")
+    config_dir = os.path.expanduser("~/.jupyter/")
     ipy_dir = os.path.expanduser("~/.ipython/profile_default/startup/")
 
+    # Para notebook
     if os.path.exists(r'backup\jupyter_notebook_config.py'):
-        os.remove(config_file)
-        os.remove(ipy_dir)
-        shutil.move(r'backup\jupyter_notebook_config.py', config_file)
+        os.remove(config_dir + r'\\jupyter_notebook_config.py')
+        os.remove(ipy_dir + r'\\jupyter_startup.py')
+        shutil.move(r'backup\jupyter_notebook_config.py', config_dir)
     else:
-        os.remove(config_file)
-        os.remove(ipy_dir)
-        
+        os.remove(config_dir + r'\\jupyter_notebook_config.py')
+        os.remove(ipy_dir + r'\\jupyter_startup.py')
+    
+    # Para py file
+    site_dir = os.path.expanduser('~/anaconda3/Lib/')
+    
+    if os.path.exists(r'backup\sitecustomize.py'):
+        os.remove(site_dir + r'\\sitecustomize.py')
+        shutil.move(r'backup\sitecustomize.py', site_dir)
+    else:
+        os.remove(site_dir + r'\\sitecustomize.py')
+    
     print('Reseteado a configuraciones iniciales.')
         
 def gui():
