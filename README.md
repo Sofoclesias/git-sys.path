@@ -1,6 +1,6 @@
-# Añade el directorio raíz de git al entorno virtual de tus notebooks.
+# Añade el directorio raíz de git al entorno virtual de anaconda.
 
-Estoy harto de que los notebooks solo te detecten el directorio local donde se ubican para sus labores. Particularmente, me tiene hastiado que no respeten los entornos virtuales creados por los repositorios para organizar los proyectos.
+Estoy harto de que los notebooks y archivos py solo te detecten el directorio local donde se ubican para sus labores. Particularmente, me tiene hastiado que no respeten los entornos virtuales creados por los repositorios para organizar los proyectos.
 
 Este repositorio, de forma sencilla y directa, agrega un comando al archivo de configuraciones de IPython para que agregue al sys.path el directorio que contenga la carpeta .git, es decir, el directorio raíz de un repositorio. Así, ya tendrás la libertad para manipular todos los archivos relativos a tu repositorio en el kernel de Notebook e importar todos tus módulos.
 
